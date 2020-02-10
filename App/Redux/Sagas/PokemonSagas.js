@@ -29,7 +29,7 @@ export function * getPokemonSpecie (api, { pokemonId }) {
   const response = yield call(api.pokemon.specie, pokemonId)
 
   if (response.ok) {
-    yield put(PokemonActions.pokemonsSpecieRequestSuccess(response.data))
+    yield put(PokemonActions.pokemonSpecieRequestSuccess(response.data))
   } else {
     yield put(PokemonActions.pokemonSpecieRequestFailure())
   }

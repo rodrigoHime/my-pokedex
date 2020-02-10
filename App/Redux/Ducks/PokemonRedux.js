@@ -7,9 +7,9 @@ const { Types, Creators } = createActions({
   pokemonsRequest: ['limit', 'offset'],
   pokemonsRequestSuccess: ['pokemons'],
   pokemonsRequestFailure: null,
-  pokemonsSpecieRequest: ['pokemonId'],
-  pokemonsSpecieRequestSuccess: ['pokemonSpecie'],
-  pokemonsSpecieRequestFailure: null
+  pokemonSpecieRequest: ['pokemonId'],
+  pokemonSpecieRequestSuccess: ['pokemonSpecie'],
+  pokemonSpecieRequestFailure: null
 })
 
 export const PokemonTypes = Types
@@ -38,14 +38,14 @@ export const pokemonsRequestSuccess = (state, { pokemons }) => {
 export const pokemonsRequestFailure = state =>
   state.merge({ pokemonsRequesting: false, pokemonsRequestingError: true })
 
-export const pokemonsSpecieRequest = (state) =>
+export const pokemonSpecieRequest = (state) =>
   state.merge({ pokemonSpecieRequesting: true, pokemonSpecie: {} })
 
-export const pokemonsSpecieRequestSuccess = (state, { pokemonSpecie }) => {
-  return state.merge({ pokemonSpecieRequesting: false, pokemonSpecieRequestingError: null, pokemonSpecie })
+export const pokemonSpecieRequestSuccess = (state, { pokemonSpecie }) => {
+  return state.merge({ pokemonSpecieRequesting: false, pokemonSpecieRequestingError: false, pokemonSpecie })
 }
 
-export const pokemonsSpecieRequestFailure = state =>
+export const pokemonSpecieRequestFailure = state =>
   state.merge({ pokemonSpecieRequesting: false, pokemonSpecieRequestingError: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -54,7 +54,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.POKEMONS_REQUEST]: pokemonsRequest,
   [Types.POKEMONS_REQUEST_SUCCESS]: pokemonsRequestSuccess,
   [Types.POKEMONS_REQUEST_FAILURE]: pokemonsRequestFailure,
-  [Types.POKEMONS_SPECIE_REQUEST]: pokemonsSpecieRequest,
-  [Types.POKEMONS_SPECIE_REQUEST_SUCCESS]: pokemonsSpecieRequestSuccess,
-  [Types.POKEMONS_SPECIE_REQUEST_FAILURE]: pokemonsSpecieRequestFailure
+  [Types.POKEMON_SPECIE_REQUEST]: pokemonSpecieRequest,
+  [Types.POKEMON_SPECIE_REQUEST_SUCCESS]: pokemonSpecieRequestSuccess,
+  [Types.POKEMON_SPECIE_REQUEST_FAILURE]: pokemonSpecieRequestFailure
 })

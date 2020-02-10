@@ -21,6 +21,6 @@ export default function * root () {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(PokemonTypes.POKEMONS_REQUEST, listPokemons, api),
-    takeLatest(PokemonTypes.POKEMONS_SPECIE_REQUEST, getPokemonSpecie, api)
+    takeLatest(PokemonTypes.POKEMON_SPECIE_REQUEST, getPokemonSpecie, api)
   ])
 }

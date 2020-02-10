@@ -4,7 +4,8 @@ import {
   View,
   FlatList,
   ActivityIndicator,
-  SafeAreaView
+  SafeAreaView,
+  Alert
 } from 'react-native'
 
 // Actions
@@ -28,6 +29,7 @@ export default function PokemonsScreen (props) {
   const dispatch = useDispatch()
   const pokemons = useSelector(state => state.pokemon.pokemons)
   const pokemonsRequesting = useSelector(state => state.pokemon.pokemonsRequesting)
+  const pokemonsRequestingError = useSelector(state => state.pokemon.pokemonsRequestingError)
 
   // componentDidMount
   useEffect(() => {
@@ -41,6 +43,9 @@ export default function PokemonsScreen (props) {
       setRequesting(false)
       setRefreshing(false)
       setRequestingMore(false)
+      if (pokemonsRequestingError) {
+        Alert.alert('Ops! Ocorreu um problema na comunicação com nossos servidores. :/')
+      }
     }
   }, [pokemonsRequesting])
 

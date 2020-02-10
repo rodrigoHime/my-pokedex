@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ScrollView, Text, Image, View, SafeAreaView, FlatList } from 'react-native'
+import { ScrollView, Text, Image, View, SafeAreaView, FlatList, Alert } from 'react-native'
 
 import * as R from 'ramda'
 import _ from 'lodash'
@@ -27,12 +27,23 @@ export default function PokemonDetailsScreen (props) {
   const dispatch = useDispatch()
   const pokemonSpecie = useSelector(state => state.pokemon.pokemonSpecie)
   const pokemonSpecieRequesting = useSelector(state => state.pokemon.pokemonSpecieRequesting)
+  const pokemonSpecieRequestingError = useSelector(state => state.pokemon.pokemonSpecieRequestingError)
 
   // componentDidMount
   useEffect(() => {
     setRequesting(true)
-    dispatch(PokemonActions.pokemonsSpecieRequest(pokemon.id))
+    dispatch(PokemonActions.pokemonSpecieRequest(pokemon.id))
   }, [])
+
+  // pokemonsSpecieRequesting update
+  useEffect(() => {
+    if (!pokemonSpecieRequesting && requesting) {
+      setRequesting(false)
+      if (pokemonSpecieRequestingError) {
+        Alert.alert('Ops! Ocorreu um problema na comunicação com nossos servidores. :/')
+      }
+    }
+  }, [pokemonSpecieRequesting])
 
   function pokemonTypesBadges () {
     return pokemonSortedTypes.map(({ type }) => (
